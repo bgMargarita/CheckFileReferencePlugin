@@ -6,5 +6,9 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class CheckingFileReferencesProvider implements InspectionToolProvider {
+    @NotNull
+    public Class[] getInspectionClasses() {
+        return new Class[]{CheckingFileReferencesInspection.class};
+    }
 
 }
