@@ -1,0 +1,14 @@
+<idea-plugin>
+    <name>Checking File Availability</name>
+    <description>Inspection for file references in Java code for existence in classpath</description>
+    <version>1.0</version>
+    <vendor>JetBrains</vendor>
+    <!--
+    <idea-version since-build="3000"/>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <inspectionToolProvider implementation="com.intellij.codeInspection.CheckingFileReferencesProvider"/>
+    </extensions>
+
+</idea-plugin>
