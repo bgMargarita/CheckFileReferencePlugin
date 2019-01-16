@@ -97,5 +97,20 @@ public class CheckingFileReferencesInspection extends BaseJavaLocalInspectionToo
         }
     }
 
+    public JComponent createOptionsPanel() {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        final JTextField checkedClasses = new JTextField(CHECKED_CLASSES);
+        checkedClasses.getDocument().addDocumentListener(new DocumentAdapter() {
+            public void textChanged(DocumentEvent event) {
+                CHECKED_CLASSES = checkedClasses.getText();
+            }
+        });
 
+        panel.add(checkedClasses);
+        return panel;
+    }
+
+    public boolean isEnabledByDefault() {
+        return true;
+    }
 }
