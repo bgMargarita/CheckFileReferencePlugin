@@ -87,6 +87,15 @@ public class CheckingFileReferencesInspection extends BaseJavaLocalInspectionToo
             return "File does not exist";
         }
 
+        public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
 
+        }
+
+        @NotNull
+        public String getFamilyName() {
+            return getName();
+        }
     }
+
+
 }
