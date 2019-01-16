@@ -38,5 +38,22 @@ public class TestThisPlugin extends UsefulTestCase {
         myFixture = null;
     }
 
+    protected void doTest(String testName, String hint) throws Throwable {
+        myFixture.configureByFile(testName + ".java");
+        //noinspection unchecked
+        myFixture.enableInspections(com.intellij.codeInspection.CheckingFileReferencesInspection.class);
+        List<HighlightInfo> highlightInfos = myFixture.doHighlighting();
+        Assert.assertTrue(!highlightInfos.isEmpty());
 
+        final IntentionAction action = myFixture.findSingleIntention(hint);
+
+        Assert.assertNotNull(action);
+        myFixture.launchAction(action);
+        myFixture.checkResultByFile(testName + ".java");
+    }
+
+    // Test the "==" case
+    public void test() throws Throwable {
+        doTest("test1", "File does not exist");
+    }
 }

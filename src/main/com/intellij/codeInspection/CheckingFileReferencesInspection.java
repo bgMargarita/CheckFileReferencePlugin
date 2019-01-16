@@ -12,6 +12,7 @@ import org.jetbrains.annotations.*;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import java.awt.*;
+import java.io.File;
 import java.util.StringTokenizer;
 
 
@@ -66,6 +67,17 @@ public class CheckingFileReferencesInspection extends BaseJavaLocalInspectionToo
             }
 
             @Override
+            public void visitStatement(PsiStatement statement) {
+                super.visitStatement(statement);
+                //TODO
+                String javaText = statement.getText();
+                if (javaText.contains(".property") || javaText.contains(".txt") || javaText.contains(".java")) {
+                    holder.registerProblem(statement, DESCRIPTION_TEMPLATE, myQuickFix);
+                }
+
+            }
+
+          /*  @Override
             public void visitBlockStatement(PsiBlockStatement statement) {
                 super.visitBlockStatement(statement);
                 //TODO
@@ -76,7 +88,7 @@ public class CheckingFileReferencesInspection extends BaseJavaLocalInspectionToo
                         holder.registerProblem(statement, DESCRIPTION_TEMPLATE, myQuickFix);
                     }
                 }
-            }
+            }*/
         };
     }
 
@@ -111,6 +123,8 @@ public class CheckingFileReferencesInspection extends BaseJavaLocalInspectionToo
     }
 
     public boolean isEnabledByDefault() {
+
+
         return true;
     }
 }
