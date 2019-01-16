@@ -67,6 +67,14 @@ public class CheckingFileReferencesInspection extends BaseJavaLocalInspectionToo
             }
 
             @Override
+            public void visitElement(PsiElement element) {
+                super.visitElement(element);
+                String javaText = element.getText();
+                if (javaText.contains(".property") || javaText.contains(".txt") || javaText.contains(".java")) {
+                    holder.registerProblem(element, DESCRIPTION_TEMPLATE, myQuickFix);
+                }
+            }
+            @Override
             public void visitStatement(PsiStatement statement) {
                 super.visitStatement(statement);
                 //TODO
